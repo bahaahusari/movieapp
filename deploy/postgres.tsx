@@ -1,4 +1,4 @@
-import Adapt, { handle, useImperativeMethods } from "@usys/adapt";
+import Adapt, { useImperativeMethods } from "@adpt/core";
 
 export function ProdPostgres() {
     useImperativeMethods(() => ({

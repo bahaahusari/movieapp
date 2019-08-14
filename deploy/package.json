@@ -1,21 +1,16 @@
 {
   "name": "reactapp",
   "version": "1.0.0",
-  "description": "Adapt project to deploy a node app with Postgres",
-  "main": "dist/index.js",
+  "description": "Adapt project to deploy a demo MovieDB React app with Postgres",
+  "private": true,
   "scripts": {},
   "author": "",
-  "license": "UNLICENSED",
+  "license": "BSD-3-Clause",
   "dependencies": {
-    "@types/fs-extra": "^5.0.4",
-    "@types/lodash": "^4.14.112",
+    "@adpt/cloud": "latest",
+    "@adpt/core": "latest",
     "@types/node": "^8.10.20",
-    "@usys/adapt": "unit-tests",
-    "@usys/cloud": "unit-tests",
-    "@usys/utils": "unit-tests",
-    "fs-extra":"^7.0.1",
-    "lodash": "^4.17.11",
-    "source-map-support": "^0.5.5",
+    "source-map-support": "^0.5.6",
     "typescript": "^3.0.3"
   }
 }

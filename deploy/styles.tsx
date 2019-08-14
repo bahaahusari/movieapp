@@ -1,14 +1,16 @@
-import Adapt, { concatStyles, Style } from "@usys/adapt";
-import { Service, ServiceProps } from "@usys/cloud";
-import { HttpServer, HttpServerProps, UrlRouter, UrlRouterProps } from "@usys/cloud/http";
-import { ServiceDeployment } from "@usys/cloud/k8s";
-import * as nginx from "@usys/cloud/nginx";
-import { Postgres, TestPostgres } from "@usys/cloud/postgres";
+import Adapt, { concatStyles, Style } from "@adpt/core";
+import { Service, ServiceProps } from "@adpt/cloud";
+import { HttpServer, HttpServerProps, UrlRouter, UrlRouterProps } from "@adpt/cloud/http";
+import { ServiceDeployment } from "@adpt/cloud/k8s";
+import * as nginx from "@adpt/cloud/nginx";
+import { Postgres, TestPostgres } from "@adpt/cloud/postgres";
 import { ProdPostgres } from "./postgres";
 
 export function kubeconfig() {
     // tslint:disable-next-line:no-var-requires
-    return require("./kubeconfig.json");
+    return {
+        kubeconfig: require("./kubeconfig.json")
+    };
 }
 
 // Terminate containers quickly for demos

@@ -1,8 +1,7 @@
-import Adapt, { Group, handle } from "@usys/adapt";
-import { useMethod } from "@usys/cloud";
-import { HttpServer, UrlRouter } from "@usys/cloud/http";
-import { NodeService } from "@usys/cloud/nodejs";
-import { Postgres } from "@usys/cloud/postgres";
+import Adapt, { Group, handle, useMethod } from "@adpt/core";
+import { HttpServer, UrlRouter } from "@adpt/cloud/http";
+import { NodeService } from "@adpt/cloud/nodejs";
+import { Postgres } from "@adpt/cloud/postgres";
 import { k8sStyle, laptopStyle, prodStyle } from "./styles";
 
 function App() {
@@ -14,19 +13,18 @@ function App() {
 
     return <Group key="App">
 
-        <UrlRouter key="url-router"
+        <UrlRouter
             port={8080}
             routes={[
                 { path: "/api/", endpoint: api },
                 { path: "/", endpoint: stat }
             ]} />
 
-        <NodeService key="api-service" handle={api}
-            srcDir=".." env={connectEnv} deps={pg} />
+        <NodeService handle={api} srcDir=".." env={connectEnv} deps={pg} />
 
         <Postgres handle={pg} />
 
-        <HttpServer key="static-service" handle={stat} scope="cluster-internal"
+        <HttpServer handle={stat} scope="cluster-internal"
             add={[{ type: "image", image: api, stage: "app",
                     files: [{ src: "/app/build", dest: "/www/static" }]}]} />
 
