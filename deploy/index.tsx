@@ -1,4 +1,4 @@
-import Adapt, { Group, handle, useMethod } from "@adpt/core";
+import Adapt, { Group, handle } from "@adpt/core";
 import { HttpServer, UrlRouter } from "@adpt/cloud/http";
 import { NodeService } from "@adpt/cloud/nodejs";
 import { Postgres } from "@adpt/cloud/postgres";
@@ -9,8 +9,6 @@ function App() {
     const api = handle();
     const stat = handle();
 
-    const connectEnv = useMethod(pg, {}, "connectEnv");
-
     return <Group key="App">
 
         <UrlRouter
@@ -20,7 +18,7 @@ function App() {
                 { path: "/", endpoint: stat }
             ]} />
 
-        <NodeService handle={api} srcDir=".." env={connectEnv} deps={pg} />
+        <NodeService handle={api} srcDir=".." connectTo={pg} />
 
         <Postgres handle={pg} />
 
