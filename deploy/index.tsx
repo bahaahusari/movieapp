@@ -29,6 +29,7 @@ function App() {
     </Group>;
 }
 
+Adapt.stack("default", <App />, k8sStyle)
 Adapt.stack("laptop", <App />, laptopStyle);
 Adapt.stack("prod", <App />, prodStyle);
 Adapt.stack("k8s", <App />, k8sStyle);
