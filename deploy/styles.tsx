@@ -4,12 +4,19 @@ import { HttpServer, HttpServerProps, UrlRouter, UrlRouterProps } from "@adpt/cl
 import { ServiceDeployment } from "@adpt/cloud/k8s";
 import * as nginx from "@adpt/cloud/nginx";
 import { Postgres, TestPostgres } from "@adpt/cloud/postgres";
+import * as fs from "fs";
 
 export function kubeconfig() {
-    // tslint:disable-next-line:no-var-requires
+    let configPath = process.env.KUBECONFIG;
+    if (!configPath) {
+        configPath = "./kubeconfig.json";
+        if (!fs.existsSync(configPath)) {
+            throw new Error(`Cannot find kubeconfig. Environment variable KUBECONFIG not set and ${configPath} not found`);
+        }
+    }
     return {
-        kubeconfig: require("./kubeconfig.json")
-    };
+        kubeconfig: require(configPath)
+    }
 }
 
 // Terminate containers quickly for demos
