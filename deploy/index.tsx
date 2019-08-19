@@ -1,15 +1,13 @@
-import Adapt, { Group, handle, useMethod } from "@adpt/core";
+import Adapt, { Group, handle } from "@adpt/core";
 import { HttpServer, UrlRouter } from "@adpt/cloud/http";
 import { NodeService } from "@adpt/cloud/nodejs";
 import { Postgres } from "@adpt/cloud/postgres";
-import { k8sStyle, laptopStyle, prodStyle } from "./styles";
+import { k8sStyle } from "./styles";
 
 function App() {
     const pg = handle();
     const api = handle();
     const stat = handle();
-
-    const connectEnv = useMethod(pg, {}, "connectEnv");
 
     return <Group key="App">
 
@@ -20,7 +18,7 @@ function App() {
                 { path: "/", endpoint: stat }
             ]} />
 
-        <NodeService handle={api} srcDir=".." env={connectEnv} deps={pg} />
+        <NodeService handle={api} srcDir=".." connectTo={pg} />
 
         <Postgres handle={pg} />
 
@@ -31,6 +29,5 @@ function App() {
     </Group>;
 }
 
-Adapt.stack("laptop", <App />, laptopStyle);
-Adapt.stack("prod", <App />, prodStyle);
+Adapt.stack("default", <App />, k8sStyle)
 Adapt.stack("k8s", <App />, k8sStyle);
