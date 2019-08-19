@@ -4,7 +4,6 @@ import { HttpServer, HttpServerProps, UrlRouter, UrlRouterProps } from "@adpt/cl
 import { ServiceDeployment } from "@adpt/cloud/k8s";
 import * as nginx from "@adpt/cloud/nginx";
 import { Postgres, TestPostgres } from "@adpt/cloud/postgres";
-import { ProdPostgres } from "./postgres";
 
 export function kubeconfig() {
     // tslint:disable-next-line:no-var-requires
@@ -40,25 +39,4 @@ export const k8sStyle = concatStyles(commonStyle,
 
         {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
             <ServiceDeployment config={kubeconfig()} {...props} {...demoProps} />)}
-    </Style>);
-
-/*
- * Laptop testing style
- */
-export const laptopStyle = concatStyles(commonStyle,
-    <Style>
-        {Postgres} {Adapt.rule(() =>
-            <TestPostgres mockDbName="test_db" mockDataPath="./test_db.sql" />)}
-    </Style>);
-
-/*
- * Production style
- */
-export const prodStyle = concatStyles(commonStyle,
-    <Style>
-        {Postgres} {Adapt.rule(() =>
-            <ProdPostgres />)}
-
-        {Service} {Adapt.rule<ServiceProps>(({ handle, ...props }) =>
-            <ServiceDeployment config={kubeconfig()} {...props} />)}
     </Style>);

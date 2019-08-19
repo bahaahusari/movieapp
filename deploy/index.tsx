@@ -2,7 +2,7 @@ import Adapt, { Group, handle } from "@adpt/core";
 import { HttpServer, UrlRouter } from "@adpt/cloud/http";
 import { NodeService } from "@adpt/cloud/nodejs";
 import { Postgres } from "@adpt/cloud/postgres";
-import { k8sStyle, laptopStyle, prodStyle } from "./styles";
+import { k8sStyle } from "./styles";
 
 function App() {
     const pg = handle();
@@ -30,6 +30,4 @@ function App() {
 }
 
 Adapt.stack("default", <App />, k8sStyle)
-Adapt.stack("laptop", <App />, laptopStyle);
-Adapt.stack("prod", <App />, prodStyle);
 Adapt.stack("k8s", <App />, k8sStyle);
