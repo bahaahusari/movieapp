@@ -88,5 +88,5 @@ export async function k8sProdStyle() {
 }
 
 export async function clusterInfo() {
-    return makeClusterInfo({ registryUrl: process.env.KUBE_DOCKER_REPO || undefined });
+    return makeClusterInfo({ registryPrefix: process.env.KUBE_DOCKER_REPO || undefined });
 }
