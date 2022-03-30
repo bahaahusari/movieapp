@@ -18,11 +18,11 @@ steps:
 
 # Run Adapt
   - id: 'deploy'
-    name: 'gcr.io/devops3-analiza/prod-movieapp'
+    name: 'gcr.io/devops2-analiza/prod-movieapp'
     entrypoint: 'adapt' 
     env: 
-    - 'KUBECONFIG=gcr.io/devops3-analiza/prod-movieapp'
-    - 'KUBE_DOCKER_REPO=gcr.io/devops3-analiza/prod-movieapp'
+    - 'KUBECONFIG=gcr.io/devops2-analiza/prod-movieapp'
+    - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza/prod-movieapp'
     # args: ['run','k8s-test','--deployID','prod-movieapp']
     args: ['update','prod-movieapp']
     dir: 'deploy'
