@@ -18,7 +18,7 @@ steps:
 
 # Run Adapt
   - id: 'deploy'
-    name: 'gcr.io/devops2-analiza/prod-movieapp'
+    name: 'gcr.io/devops2-analiza/movieapp'
     entrypoint: 'adapt' 
     env: 
     - 'KUBECONFIG=gcr.io/devops2-analiza/prod-movieapp'
