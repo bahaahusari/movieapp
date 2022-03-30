@@ -24,7 +24,7 @@ steps:
     - 'KUBECONFIG=gcr.io/devops2-analiza/prod-movieapp'
     - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza/prod-movieapp'
     # args: ['run','k8s-test','--deployID','movieapp-']
-    args: ['update','prod-movieapp']
+    args: ['run','prod-movieapp']
     dir: 'deploy'
              
 
