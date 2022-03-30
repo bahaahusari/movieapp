@@ -14,17 +14,17 @@ steps:
             --project devops2-analiza
           gcloud auth configure-docker --quiet
           cd deploy/  
-          export KUBE_DOCKER_REPO=gcr.io/devops2-analiza/prod-prod-movieapp
+          export KUBE_DOCKER_REPO=gcr.io/devops2-analiza/prod-movieapp
 
 # Run Adapt
   - id: 'deploy'
-    name: 'gcr.io/devops2-analiza/prod-prod-movieapp'
+    name: 'gcr.io/devops2-analiza/prod-movieapp'
     entrypoint: 'adapt' 
     env: 
-    - 'KUBECONFIG=gcr.io/devops2-analiza/prod-prod-movieapp'
+    - 'KUBECONFIG=gcr.io/devops2-analiza/prod-movieapp'
     - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza/prod-movieapp'
-    # args: ['run','k8s-test','--deployID','prod-movieapp-']
-    args: ['update','prod-prod-prod-movieapp']
+    # args: ['run','k8s-test','--deployID','movieapp-']
+    args: ['update','prod-movieapp']
     dir: 'deploy'
              
 
