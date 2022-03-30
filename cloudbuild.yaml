@@ -9,29 +9,20 @@ steps:
       - '-c'
       - | 
           npm install -g @adpt/cli
-
-          gcloud config set compute/zone europe-west1-b
-
           gcloud container clusters get-credentials autopilot-cluster \
             --region=europe-west1 \
             --project devops2-analiza
-
           gcloud auth configure-docker --quiet
-          
           cd deploy/  
-
-          export KUBE_DOCKER_REPO=gcr.io/devops2-analiza 
-
-
-#adapt run k8s-test --deployID movieapp
+          export KUBE_DOCKER_REPO=gcr.io/devops2-analiza/movieapp
 
 # Run Adapt
   - id: 'deploy'
-    name: 'gcr.io/devops2-analiza'
+    name: 'gcr.io/devops2-analiza/movieapp'
     entrypoint: 'adapt' 
     env: 
-    - 'KUBECONFIG=gcr.io/devops2-analiza'
-    - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza'
+    - 'KUBECONFIG=gcr.io/devops2-analiza/movieapp'
+    - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza/movieapp'
     # args: ['run','k8s-test','--deployID','movieapp-']
     args: ['update','prod-movieapp']
     dir: 'deploy'
