@@ -1,0 +1,43 @@
+steps:
+
+### Deployment by adapt
+  - id: 'pre-deploy'
+    name: 'gcr.io/cloud-builders/gcloud'
+    env:
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - | 
+          npm install -g @adpt/cli
+
+          gcloud config set compute/zone europe-west1-b
+
+          gcloud container clusters get-credentials autopilot-cluster \
+            --region=europe-west1 \
+            --project devops2-analiza
+
+          gcloud auth configure-docker --quiet
+          
+          cd deploy/  
+
+          export KUBE_DOCKER_REPO=gcr.io/devops2-analiza 
+
+
+#adapt run k8s-test --deployID movieapp
+
+# Run Adapt
+  - id: 'deploy'
+    name: 'gcr.io/devops2-analiza'
+    entrypoint: 'adapt' 
+    env: 
+    - 'KUBECONFIG=gcr.io/devops2-analiza'
+    - 'KUBE_DOCKER_REPO=gcr.io/devops2-analiza'
+    # args: ['run','k8s-test','--deployID','movieapp-']
+    args: ['update','prod-movieapp']
+    dir: 'deploy'
+             
+
+### Timeout
+timeout: "1600s"
+options:
+ logging: CLOUD_LOGGING_ONLY
